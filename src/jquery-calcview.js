@@ -22,7 +22,7 @@
             lineBreak: /<br\s*\/?>/i,
             lineBreakSymbol: '<br/>',
             lineHeight: 16,
-            column: 40,
+            column: 80,
         }, options );
 
         return this.each(function() {
@@ -36,8 +36,9 @@
                 panel.css('white-space', 'pre');
             }
             panel.css('font-family', 'monospace');
-            var data = panel.html().split(settings.lineBreak);
+            var data = panel.html().trim().split(settings.lineBreak);
             data = data.map(function(line){
+                line = line.trim()
                 return line.replace(':.. ', repeat(' ', settings.column - line.length + 3));
             })
             if (settings.capitalize) {

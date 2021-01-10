@@ -8,30 +8,44 @@
         return 0;
     }
 
+    function repeat(string, times) {
+        times = times > 0 ? times : 1;
+        return Array(times + 1).join(string);
+    }
+
     $.fn.calcview = function(options) {
         var settings = $.extend({
-            preStyle: false,
+            preStyle: true,
             sort: false,
             sortByDate: false,
             capitalize: false,
             lineBreak: /<br\s*\/?>/i,
             lineBreakSymbol: '<br/>',
-            column: 80,
+            lineHeight: 16,
+            column: 40,
         }, options );
 
         return this.each(function() {
             var panel = $(this);
+            //panel.css('background-color', '#E5E5F7');
+            //panel.css('opacity', '0.4');
+            panel.css('line-height', settings.lineHeight+'px');
+            panel.css('background-image', 'linear-gradient(0deg, #FFFFFF 50%, #EEEEEE 50%)');
+            panel.css('background-size', (settings.lineHeight*2)+'px '+(settings.lineHeight*2)+'px');
             if (settings.preStyle) {
                 panel.css('white-space', 'pre');
             }
             panel.css('font-family', 'monospace');
             var data = panel.html().split(settings.lineBreak);
+            data = data.map(function(line){
+                return line.replace(':.. ', repeat(' ', settings.column - line.length + 3));
+            })
+            if (settings.capitalize) {
+                data = data.map(function(line){
+                    return line.charAt(0).toUpperCase() + line.slice(1);
+                })
+            }
             if (settings.sort) {
-                if (settings.capitalize) {
-                    data = data.map(function(line){
-                        return line.charAt(0).toUpperCase() + line.slice(1);
-                    })
-                }
                 if (settings.sortByDate) {
                     data.sort(function(a, b) {
                         a = timestamp(a, settings.sortByDate);

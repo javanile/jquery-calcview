@@ -30,7 +30,7 @@
             //panel.css('background-color', '#E5E5F7');
             //panel.css('opacity', '0.4');
             panel.css('line-height', settings.lineHeight+'px');
-            panel.css('background-image', 'linear-gradient(0deg, #FFFFFF 50%, #EEEEEE 50%)');
+            panel.css('background-image', 'linear-gradient(0deg, #FFFFFF 50%, #FAFAFA 50%)');
             panel.css('background-size', (settings.lineHeight*2)+'px '+(settings.lineHeight*2)+'px');
             if (settings.preStyle) {
                 panel.css('white-space', 'pre');

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Page Title</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+<style>
+</style>
+<script src="../node_modules/jquery/dist/jquery.js"></script>
+<script src="../src/jquery-calcview.js"></script>
+<script>
+    jQuery(document).ready(function() {
+        jQuery("#example1").calcview({
+            sort: true,
+            sortByDate: 'dd/mm/yyyy',
+            capitalize: true,
+        });
+    });
+</script>
+<body>
+
+<div id="example1">10/12/2020 a12<br>09/11/2020 C14</div>
+
+</body>
+</html>

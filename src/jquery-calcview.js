@@ -23,6 +23,7 @@
             lineBreakSymbol: '<br/>',
             lineHeight: 16,
             column: 80,
+            indent: 0,
         }, options );
 
         return this.each(function() {
@@ -39,7 +40,11 @@
             var data = panel.html().trim().split(settings.lineBreak);
             data = data.map(function(line){
                 line = line.trim()
-                return line.replace(':.. ', repeat(' ', settings.column - line.length + 3));
+                var spaces = settings.column - line.length + 4
+                if (line.length > settings.column) {
+                   spaces = settings.column - (line.length % settings.column) + 4;
+                }
+                return line.replace(':.. ', repeat(' ', spaces));
             })
             if (settings.capitalize) {
                 data = data.map(function(line){
@@ -59,6 +64,14 @@
                     data.sort();
                 }
             }
+            var indent = repeat(' ', settings.indent);
+            data = data.map(function(line) {
+                if (line.length > settings.column) {
+                    line = line.match(new RegExp('.{1,'+(settings.column)+'}', 'g')).join(settings.lineBreakSymbol);
+                    return line;
+                }
+                return line;
+            })
             panel.html(data.join(settings.lineBreakSymbol));
         });
     };
